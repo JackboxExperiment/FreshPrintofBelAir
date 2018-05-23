@@ -11,7 +11,7 @@ public class Ball {
     }
   }
   
-  static void move() {
-    
+  void move() {
+      ellipse (xcord + 1, ycord + 1, 50, 50);
   }
 }
