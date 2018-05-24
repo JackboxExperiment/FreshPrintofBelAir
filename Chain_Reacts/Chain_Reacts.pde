@@ -1,5 +1,5 @@
 void setup() {
-  background( 0 );
+  background(0);
   size(600, 600);
 
   for (int i = 0; i < 25; i++) {
@@ -39,8 +39,9 @@ int[] ydirs = new int[25];
 
 void draw() {
   background(0);
-
   for (int i = 0; i < 25; i++) {
+    color k = color((int) (random(256)), (int) (random(256)), (int) (random(256)));
+    fill(k);
     ellipse(xcors[i], ycors[i], 50, 50);
 
     if (xcors[i] >= 575 || xcors[i] <=25) {
