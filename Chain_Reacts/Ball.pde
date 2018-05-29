@@ -69,7 +69,7 @@ public class Ball {
   void grow() {
     if (radius > 0) {
       if (growing == 1) {
-        if (radius < 100) {
+        if (radius < 60) {
           radius += CHANGE_FACTOR;
         } else {
           growing = -1;

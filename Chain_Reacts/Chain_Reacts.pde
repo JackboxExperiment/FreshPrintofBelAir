@@ -5,14 +5,14 @@ void setup() {
   size(600, 600);
 
   for (int i = 0; i < 25; i++) { 
-    balls.add(new Ball());
+    movingBalls.add(new Ball());
   }
 }
 
-ArrayList<Ball> balls = new ArrayList<Ball>();
-ListIterator<Ball> ballsIter = balls.listIterator();
+ArrayList<Ball> movingBalls = new ArrayList<Ball>();
+//ListIterator<Ball> ballsIter = movingBalls.listIterator();
 ArrayList<Ball> growingBalls = new ArrayList<Ball>();
-ListIterator<Ball> gBallsIter = growingBalls.listIterator();
+//ListIterator<Ball> gBallsIter = growingBalls.listIterator();
 ArrayList<Ball> toBeRemoved = new ArrayList<Ball>();
 
 
@@ -20,27 +20,12 @@ ArrayList<Ball> toBeRemoved = new ArrayList<Ball>();
 void draw() {
   background(0);
 
-
-
-  //while (ballsIter.hasNext()) {
-  //  Ball goat = ballsIter.next();
-  //  if (goat.contact(growingBalls.get(0))) {
-  //    ballsIter.remove();
-  //  }
-    
-  //  //while (gBallsIter.hasNext()) {
-  //  //  Ball gBall = gBallsIter.next();
-  //  //  if (goat.contact(gBall)) {
-  //  //    ballsIter.remove();
-  //  //    gBallsIter.add(gBall);
-  //  //  }
-  //  //}
-   
-  //}
   
-  toBeRemoved = new ArrayList<Ball>();
+  toBeRemoved = new ArrayList<Ball>(); //clears toBeRemoved each draw
   
-  for (Ball b : balls) {
+  
+  //add the movingBalls that  toBeRemoved 
+  for (Ball b : movingBalls) {
     for (Ball k : growingBalls) {
       if (b.contact(k)) {
         toBeRemoved.add(b);
@@ -48,23 +33,30 @@ void draw() {
     }
   }
   
+  //removes from movingballs the balls that need to be removed
+  //add them to growing balls
   for (Ball y : toBeRemoved) {
     y.initiateGrow();
-    balls.remove(y);
+    movingBalls.remove(y);
     growingBalls.add(y);
   }
   
   
-
+  
+  //growing balls grow
   for (Ball g : growingBalls) {
     g.grow();
   }
 
-  for (Ball b : balls) {
+  //moving balls move
+  for (Ball b : movingBalls) {
     b.move();
   }
 }
 
+//mouse is created in the spot and grows
 void mouseClicked() {
-  growingBalls.add(new Ball(mouseX, mouseY));
+  Ball mouseB = new Ball(mouseX, mouseY);
+  mouseB.initiateGrow();
+  growingBalls.add(mouseB);
 }
